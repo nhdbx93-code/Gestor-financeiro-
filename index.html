@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Flow | Premium Edition</title>
+    <title>Finance Flow | Macena do Corte</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,6 +16,21 @@
             --text: #ffffff;
             --radius-lg: 35px;
             --radius-md: 20px;
+        }
+
+        /* Estilos da Logo */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+            margin-bottom: 5px;
+        }
+
+        .logo-app {
+            width: 120px; /* Ajuste o tamanho aqui */
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.3));
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -53,7 +68,6 @@
         .main-balance p { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-bottom: 5px; }
         .main-balance h1 { font-size: 3rem; font-weight: 800; letter-spacing: -2px; }
 
-        /* --- BOTÃO DE APOIO (CTA) --- */
         .support-btn {
             background: var(--mercado-pago);
             color: white;
@@ -76,7 +90,6 @@
             box-shadow: 0 15px 30px rgba(0, 158, 227, 0.4);
         }
 
-        /* --- STATS --- */
         .row-stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -97,7 +110,6 @@
         .inc { color: var(--success); }
         .exp { color: var(--danger); }
 
-        /* --- FORMULÁRIO --- */
         .card-form {
             background: var(--surface);
             padding: 25px;
@@ -131,7 +143,6 @@
 
         .btn-add:hover { transform: scale(1.02); }
 
-        /* --- HISTÓRICO --- */
         .history-section h3 { font-size: 1rem; margin: 10px 0 15px 15px; color: #a78bfa; font-weight: 700; }
         .list { display: flex; flex-direction: column; gap: 10px; }
         
@@ -153,14 +164,17 @@
 
         @media (min-width: 800px) {
             .container { max-width: 850px; display: grid; grid-template-columns: 1fr 1fr; align-items: start; }
-            .main-balance, .support-btn { grid-column: span 2; }
-            .row-stats { grid-column: span 2; }
+            .logo-container, .main-balance, .support-btn, .row-stats { grid-column: span 2; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <div class="logo-container">
+            <img src="image.png" alt="Macena do Corte Logo" class="logo-app">
+        </div>
+
         <div class="main-balance">
             <p>Saldo Geral</p>
             <h1 id="balance">R$ 0,00</h1>
@@ -212,7 +226,6 @@
         const list = document.getElementById('list');
         const form = document.getElementById('form');
 
-        // Banco de dados local
         let transactions = JSON.parse(localStorage.getItem('finance_flow_clean')) || [];
 
         function formatBRL(v) {
