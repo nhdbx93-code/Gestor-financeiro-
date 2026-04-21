@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Flow | Macena do Corte</title>
+    <title>Barbearia 💈 | Gestão Financeira</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,21 +16,6 @@
             --text: #ffffff;
             --radius-lg: 35px;
             --radius-md: 20px;
-        }
-
-        /* Estilos da Logo */
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
-            margin-bottom: 5px;
-        }
-
-        .logo-app {
-            width: 120px; /* Ajuste o tamanho aqui */
-            height: auto;
-            filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.3));
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -53,6 +38,21 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+        }
+
+        /* --- NOVO HEADER: NOME DO APP --- */
+        .app-header {
+            text-align: center;
+            padding: 20px 0 10px 0;
+        }
+
+        .app-header h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
         }
 
         /* --- HEADER: SALDO --- */
@@ -84,11 +84,7 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .support-btn:hover {
-            transform: translateY(-3px);
-            filter: brightness(1.1);
-            box-shadow: 0 15px 30px rgba(0, 158, 227, 0.4);
-        }
+        .support-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
 
         .row-stats {
             display: grid;
@@ -164,16 +160,16 @@
 
         @media (min-width: 800px) {
             .container { max-width: 850px; display: grid; grid-template-columns: 1fr 1fr; align-items: start; }
-            .logo-container, .main-balance, .support-btn, .row-stats { grid-column: span 2; }
+            .app-header, .main-balance, .support-btn, .row-stats { grid-column: span 2; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="logo-container">
-            <img src="image.png" alt="Macena do Corte Logo" class="logo-app">
-        </div>
+        <header class="app-header">
+            <h2>Barbearia 💈</h2>
+        </header>
 
         <div class="main-balance">
             <p>Saldo Geral</p>
@@ -198,7 +194,7 @@
         <section class="card-form">
             <form id="form">
                 <div class="input-group">
-                    <input type="text" id="text" placeholder="Descrição da transação" required>
+                    <input type="text" id="text" placeholder="Descrição (ex: Corte de Cabelo)" required>
                 </div>
                 <div class="input-group">
                     <input type="number" step="0.01" id="amount" placeholder="Valor (R$)" required>
@@ -226,7 +222,8 @@
         const list = document.getElementById('list');
         const form = document.getElementById('form');
 
-        let transactions = JSON.parse(localStorage.getItem('finance_flow_clean')) || [];
+        // Mantive a chave 'finance_flow_macena' para não perder seus dados salvos
+        let transactions = JSON.parse(localStorage.getItem('finance_flow_macena')) || [];
 
         function formatBRL(v) {
             return v.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
@@ -265,7 +262,7 @@
             incDisplay.innerText = formatBRL(inc);
             expDisplay.innerText = formatBRL(exp);
 
-            localStorage.setItem('finance_flow_clean', JSON.stringify(transactions));
+            localStorage.setItem('finance_flow_macena', JSON.stringify(transactions));
         }
 
         form.addEventListener('submit', (e) => {
